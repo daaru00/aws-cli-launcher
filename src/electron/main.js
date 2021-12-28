@@ -132,7 +132,7 @@ class Main {
         contextIsolation: true,
         preload: path.join(app.getAppPath(), "preload.js")
       },
-      icon: this.isDevelopment() ? 'src/assets/icons/512x512.png' : undefined
+      icon: this.isDevelopment() ? 'src/assets/icons/512x512.png' : './icon.png'
     })
 
     // Register IPC channels

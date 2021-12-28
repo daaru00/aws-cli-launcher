@@ -8,6 +8,8 @@ module.exports = {
       // https://www.electron.build/configuration/configuration
       "builderOptions": {
         "appId": "com.daaru.aws-cli-launcher",
+        "productName": "AWS CLI Launcher",
+        "executableName": "aws-cli-launcher",
         "icon": "./src/assets/icons/512x512.png",
         "win": {
           "target": ["portable", "nsis"]
