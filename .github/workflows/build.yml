@@ -1,0 +1,83 @@
+name: Build/release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+
+    outputs:
+      version: ${{ steps.version.outputs.tag }}
+      release: ${{ steps.release.outputs.id }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get version tag
+        id: version
+        run: echo ::set-output name=tag::${GITHUB_REF/refs\/tags\/v/}
+
+      - name: Create release
+        id: release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ steps.version.outputs.tag }}
+          draft: true
+          prerelease: false
+
+  build:
+    name: Build Application
+    runs-on: ${{ matrix.os }}
+    needs: [release]
+
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Checkout Git repository
+        uses: actions/checkout@v2
+
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+
+      - name: Build application and upload artifacts
+        uses: samuelmeuli/action-electron-builder@v1
+        with:
+          # GitHub token, automatically provided to the action
+          # (No need to define this secret in the repo settings)
+          github_token: ${{ secrets.github_token }}
+
+          # Run electron-builder using the Vue CLI plugin 
+          # instead of calling the command directly
+          use_vue_cli: true
+
+          # Create draft release and upload artifacts
+          release: true
+
+  publish:
+    name: Publish Release
+    runs-on: ubuntu-latest
+    needs: [release, build]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Publish release
+        uses: StuYarrow/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          id: ${{ needs.release.outputs.release }}
+    
