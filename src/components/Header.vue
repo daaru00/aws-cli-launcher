@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="title">
-      AWS CLI Lancher
+      AWS CLI Launcher
     </div>
     <div>
       <ThemeSwitch />
