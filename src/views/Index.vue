@@ -1,17 +1,42 @@
 <template>
-  <h1>Profile: <ProfileSwitch /> </h1>
-  <h2>Region: <RegionSwitch /> </h2>
-
   <div class="details">
-    <h2 v-if="identity.accountId">Account: <strong>{{ identity.accountId }}</strong></h2>
-    <h3 v-if="identity.arn && identity.isRole">Role: <strong>{{ identity.role }}</strong></h3>
-    <h3 v-if="identity.arn && identity.isUser">User: <strong>{{ identity.username }}</strong></h3>
-    <h3 v-if="identity.arn && identity.isRoot">User: <strong class="alert">ROOT</strong></h3>
+    <div class="details-row">
+      <h1>Profile</h1>
+      <ProfileSwitch />
+    </div>
+    <div class="details-row">
+      <h2>Region</h2>
+      <RegionSwitch />
+    </div>
+    
+    <div class="row-separator"></div>
+
+    <div class="details-row" v-if="identity.accountId">
+      <h3>Account</h3>
+      <strong>{{ identity.accountId }}</strong>
+    </div>
+    <div class="details-row" v-if="identity.arn && identity.isRole">
+      <h3>Role</h3>
+      <strong>{{ identity.role }}</strong>
+    </div>
+    <div class="details-row" v-else-if="identity.arn && identity.isUser">
+      <h3>User</h3>
+      <strong>{{ identity.username }}</strong>
+    </div>
+    <div class="details-row" v-else-if="identity.arn && identity.isRoot">
+      <h3>User</h3>
+      <strong class="alert">ROOT</strong>
+    </div>
+    <div class="details-row loading-placeholder" v-else></div>
+
+    <div class="row-separator"></div>
   </div>
 
-  <TerminalLauncher />
-  <ConsoleLauncher />
-  <ExitOnLaunchCheck />
+  <div class="buttons-containers">
+    <TerminalLauncher />
+    <ConsoleLauncher />
+    <ExitOnLaunchCheck />
+  </div>
 </template>
 
 <script setup>
@@ -39,10 +64,6 @@ pre {
   color: var(--background-color);
 }
 
-h1,h2,h3 {
-  user-select: none;
-}
-
 strong {
   user-select: all;
   white-space: nowrap;
@@ -54,11 +75,31 @@ strong.alert {
   color: var(--error-color);
 }
 
-select {
-  font-size: 0.75em;
+.details {
+  min-height: 61.8033988749895vh;
 }
 
-.details {
-  min-height: 10em;
+.details-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.row-separator {
+  height: 5px;
+  border-bottom: 1px solid var(--border-color);
+  margin: 1em 0;
+  opacity: 0.2;
+}
+
+.buttons-containers {
+  display: flex;
+  flex-direction: column;
+}
+
+.loading-placeholder {
+  justify-content: center;
+  min-height: 5em;
 }
 </style>
