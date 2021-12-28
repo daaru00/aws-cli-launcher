@@ -1,4 +1,6 @@
-# Electron Vue3 Template
+# AWS CLI Launcher
+
+A simple application that list AWS CLI's configured profiles, assuming it, list information and launch a terminal with `AWS_PROFILE` and `AWS_REGION` environment variables set.
 
 ## Project setup
 ```

@@ -1,6 +1,13 @@
 {
-  "name": "aws-profile-selector",
+  "name": "aws-cli-launcher",
   "description": "AWS CLI Launcher",
+  "author": {
+    "name": "Fabio Gollinucci",
+    "email": "fbgolly@gmail.com"
+  },
+  "homepage": "https://github.com/daaru00/aws-cli-launcher/",
+  "repository": "github:daaru00/aws-cli-launcher",
+  "main": "background.js",
   "version": "0.1.0",
   "private": true,
   "scripts": {

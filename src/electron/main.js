@@ -41,6 +41,9 @@ class Main {
    * Init entry point
    */
   init() {
+    // Disable hardware acceleration
+    app.disableHardwareAcceleration()
+
     // Register hooks
     app.on('ready', this.onReady.bind(this));
     app.on('window-all-closed', this.onWindowAllClosed.bind(this));
@@ -84,6 +87,8 @@ class Main {
       } catch (e) {
         console.error('Vue Devtools failed to install:', e.toString())
       }
+    } else {
+      this.createWindow()
     }
   }
 

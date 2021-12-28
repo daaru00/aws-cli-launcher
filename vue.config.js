@@ -7,7 +7,7 @@ module.exports = {
       "mainProcessWatch": ['src/electron/**/*'],
       // https://www.electron.build/configuration/configuration
       "builderOptions": {
-        "appId": "app.electron.example",
+        "appId": "com.daaru.aws-cli-launcher",
         "icon": "./src/assets/icons/512x512.png",
         "win": {
           "target": ["portable", "nsis"]
