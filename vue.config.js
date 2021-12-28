@@ -10,19 +10,19 @@ module.exports = {
         "appId": "com.daaru.aws-cli-launcher",
         "productName": "AWS CLI Launcher",
         "executableName": "aws-cli-launcher",
-        "icon": "./src/assets/icons/512x512.png",
+        "icon": "./public/icon.png",
         "win": {
           "target": ["portable", "nsis"]
         },
         "linux": {
-          "target": ["deb", "rpm", "tar.gz", "appImage"],
-          "category": "Office",
-          "icon": "./src/assets/icons/"
+          //"target": ["deb", "rpm", "tar.gz", "appImage"],
+          "target": ["deb"],
+          "category": "Office"
         },
         "mac": {
           "target": ["dmg", "pkg", "tar.gz"],
           "category": "public.app-category.productivity",
-          "icon": "./src/assets/icons/icon.icns"
+          "icon": "./public/icon.icns"
         },
         "publish": {
           "provider": "github",

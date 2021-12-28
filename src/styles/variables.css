@@ -1,10 +1,13 @@
 :root {
+  --white: #fafafa;
+  --black: #1e1e1e;
+
   --primary-color: rgb(236, 114, 17);
   --primary-hover-color: rgb(235, 95, 7);
-  --secondary-color: rgb(0, 115, 187);
+  --secondary-color: rgb(17, 139, 236);
   --error-color: rgb(214, 39, 40);
 
-  --light-background-color: rgb(242, 243, 243);
+  --light-background-color: rgb(255, 255, 255);
   --light-border-color: rgb(170, 183, 184);
   --light-font-color: rgb(22, 25, 31);
 

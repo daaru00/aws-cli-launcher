@@ -123,8 +123,12 @@ class Main {
     // Create browser window
     this.mainWindow = new BrowserWindow({
       height: 600,
-      width: 400,
-      resizable: false,
+      maxHeight: 700,
+      minHeight: 550,
+      width: 350,
+      maxWidth: 450,
+      minWidth: 350,
+      resizable: true,
       frame: false,
       backgroundColor: '#FFFFFF',
       webPreferences: {
@@ -132,7 +136,7 @@ class Main {
         contextIsolation: true,
         preload: path.join(app.getAppPath(), "preload.js")
       },
-      icon: this.isDevelopment() ? 'src/assets/icons/512x512.png' : './icon.png'
+      icon: this.isDevelopment() ? 'public/icon.png' : './icon.png'
     })
 
     // Register IPC channels

@@ -15,6 +15,7 @@ export function useWindow() {
   return {
     setLoading,
     isLoading: computed(() => state.loading),
+    getInfo: () => { return ipc.invoke('window-info') },
     close: () => { ipc.invoke('window-close') },
     minimize: () => { ipc.invoke('window-minimize') },
     maximize: () => { ipc.invoke('window-maximize') },

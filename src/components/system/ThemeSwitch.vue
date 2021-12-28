@@ -1,5 +1,5 @@
 <template>
-  <button @click="nextTheme()">
+  <button @click="nextTheme()" tabindex="-1">
     <Light v-if="theme === 'dark'" />
     <Dark v-if="theme === 'light'" />
   </button>

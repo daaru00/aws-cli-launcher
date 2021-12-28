@@ -15,6 +15,15 @@ class WindowChannel {
   }
 
   /**
+   * Return application infos
+   */
+  async infoHandler() {
+    return {
+      version: app.getVersion()
+    }
+  }
+
+  /**
    * Close window
    */
   async closeHandler() {
@@ -152,6 +161,7 @@ export default {
     })
 
     // Register handlers
+    ipcMain.handle('window-info', channel.infoHandler.bind(channel))
     ipcMain.handle('window-close', channel.closeHandler.bind(channel))
     ipcMain.handle('window-minimize', channel.minimizeHandler.bind(channel))
     ipcMain.handle('window-maximize', channel.maximizeHandler.bind(channel))

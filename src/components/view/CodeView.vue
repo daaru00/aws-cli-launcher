@@ -51,10 +51,6 @@ textarea {
   border: 0;
 }
 
-textarea:focus {
-  outline: none;
-}
-
 button {
   position: absolute;
   right: 0;

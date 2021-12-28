@@ -5,7 +5,7 @@
     </div>
     <div>
       <ThemeSwitch />
-      <button @click="close()">
+      <button @click="close()" tabindex="-1">
         <Close />
       </button>
     </div>

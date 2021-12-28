@@ -75,10 +75,6 @@ strong.alert {
   color: var(--error-color);
 }
 
-.details {
-  min-height: 61.8033988749895vh;
-}
-
 .details-row {
   display: flex;
   flex-wrap: wrap;
@@ -96,6 +92,7 @@ strong.alert {
 .buttons-containers {
   display: flex;
   flex-direction: column;
+  margin-bottom: 2em;
 }
 
 .loading-placeholder {
