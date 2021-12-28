@@ -10,12 +10,14 @@
   </div>
 
   <TerminalLauncher />
+  <ExitOnLaunchCheck />
 </template>
 
 <script setup>
 import ProfileSwitch from '../components/aws/ProfileSwitch.vue'
 import RegionSwitch from '../components/aws/RegionSwitch.vue'
 import TerminalLauncher from '../components/view/TerminalLauncher.vue'
+import ExitOnLaunchCheck from '../components/view/ExitOnLaunchCheck.vue'
 
 import { ref } from 'vue'
 import { useAWS } from '../composables/aws'

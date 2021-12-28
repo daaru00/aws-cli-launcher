@@ -9,13 +9,19 @@ import { useAWS } from '../../composables/aws'
 const { profile, region } = useAWS()
 
 import { useWindow } from '../../composables/window'
-const { openTerminal } = useWindow()
+import { useConfig } from '../../composables/config'
+const { openTerminal, close } = useWindow()
+const { config } = useConfig()
 
 const onLaunchClick = async () => {
   await openTerminal({
     AWS_PROFILE: profile.value,
     AWS_REGION: region.value
   })
+
+  if (config.exitOnLaunch) {
+    close()
+  }
 }
 </script>
 
