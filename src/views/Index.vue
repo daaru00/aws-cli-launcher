@@ -4,12 +4,13 @@
 
   <div class="details">
     <h2 v-if="identity.accountId">Account: <strong>{{ identity.accountId }}</strong></h2>
-    <h3 v-if="identity.arn && identity.isRole">Role: <strong>{{ identity.arn.split(':assumed-role/').pop().split('/').shift() }}</strong></h3>
-    <h3 v-if="identity.arn && identity.isUser">User: <strong>{{ identity.arn.split(':user/').pop() }}</strong></h3>
+    <h3 v-if="identity.arn && identity.isRole">Role: <strong>{{ identity.role }}</strong></h3>
+    <h3 v-if="identity.arn && identity.isUser">User: <strong>{{ identity.username }}</strong></h3>
     <h3 v-if="identity.arn && identity.isRoot">User: <strong class="alert">ROOT</strong></h3>
   </div>
 
   <TerminalLauncher />
+  <ConsoleLauncher />
   <ExitOnLaunchCheck />
 </template>
 
@@ -17,6 +18,7 @@
 import ProfileSwitch from '../components/aws/ProfileSwitch.vue'
 import RegionSwitch from '../components/aws/RegionSwitch.vue'
 import TerminalLauncher from '../components/view/TerminalLauncher.vue'
+import ConsoleLauncher from '../components/view/ConsoleLauncher.vue'
 import ExitOnLaunchCheck from '../components/view/ExitOnLaunchCheck.vue'
 
 import { ref } from 'vue'

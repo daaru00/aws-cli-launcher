@@ -23,5 +23,6 @@ export function useWindow() {
     openFileDialog: () => { return ipc.invoke('window-open-file', ['json']) },
     openDirectoryDialog: () => { return ipc.invoke('window-open-directory') },
     openTerminal: (env = {}) => { ipc.invoke('window-open-terminal', env) },
+    openExternalLink: (env = {}) => { ipc.invoke('window-open-link', env) },
   }
 }

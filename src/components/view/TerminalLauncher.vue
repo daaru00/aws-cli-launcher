@@ -1,6 +1,6 @@
 <template>
-  <button @click="onLaunchClick">
-    Launch
+  <button class="primary" @click="onLaunchClick" :disabled="disabled">
+    <span class="button-label">Launch terminal</span>
   </button>
 </template>
 
@@ -13,6 +13,9 @@ import { useConfig } from '../../composables/config'
 const { openTerminal, close } = useWindow()
 const { config } = useConfig()
 
+import { computed } from 'vue'
+const disabled = computed(() => !profile.value)
+
 const onLaunchClick = async () => {
   await openTerminal({
     AWS_PROFILE: profile.value,
@@ -24,15 +27,3 @@ const onLaunchClick = async () => {
   }
 }
 </script>
-
-<style scoped>
-button {
-  font-size: 1em;
-  padding: 0.5em;
-  border: 0;
-  background-color: var(--primary-color);
-  text-align: center;
-  width: 100%;
-  font-weight: bold;
-}
-</style>

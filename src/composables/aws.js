@@ -83,11 +83,25 @@ export function useAWS() {
   const loadIdentity = async () => {
     const identity = await ipc.invoke('aws-identity')
 
+    const isRole = identity.arn.includes(':assumed-role/')
+    const isUser = identity.arn.includes(':user/')
+    const isRoot = identity.arn.endsWith(':root')
+
     state.identity = Object.assign(identity, {
-      isRole: identity.arn.includes(':assumed-role/'),
-      isUser: identity.arn.includes(':user/'),
-      isRoot: identity.arn.endsWith(':root')
+      isRole,
+      isUser,
+      isRoot
     })
+
+    if (state.identity.isRole) {
+      state.identity = Object.assign(identity, {
+        role: identity.arn.split(':assumed-role/').pop().split('/').shift()
+      })
+    } else if (state.identity.isUser) {
+      state.identity = Object.assign(identity, {
+        username: identity.arn.split(':user/').pop()
+      })
+    }
   }
 
   const onAuthChanged = (callback) => {

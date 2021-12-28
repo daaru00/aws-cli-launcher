@@ -1,4 +1,4 @@
-import { dialog, app } from 'electron'
+import { dialog, app, shell } from 'electron'
 import fs from 'fs'
 import { exec } from 'child_process'
 
@@ -7,9 +7,11 @@ class WindowChannel {
   /**
    * @param {object} args
    * @param {import('electron').BrowserWindow} args.window
+   * @param {string[]} args.allowedExternalHosts
    */
-  constructor ({ window }) {
+  constructor ({ window, allowedExternalHosts }) {
     this.window = window
+    this.allowedExternalHosts = allowedExternalHosts || []
   }
 
   /**
@@ -121,6 +123,19 @@ class WindowChannel {
         break;
     }
   }
+
+  async openExternalLinkHandler(event, url) {
+    if (this.allowedExternalHosts.length > 0) {
+      const parsedUrl = new URL(url)
+
+      const allowed = this.allowedExternalHosts.findIndex(allowedHost => parsedUrl.hostname.endsWith(allowedHost)) !== -1
+      if (!allowed) {
+        return
+      }
+    }
+
+    shell.openExternal(url)
+  }
 }
 
 export default {
@@ -132,7 +147,8 @@ export default {
   register: ({ window, ipcMain }) => {
     // Bootstrap provider
     const channel = new WindowChannel({
-      window
+      window,
+      allowedExternalHosts: ['.aws.amazon.com']
     })
 
     // Register handlers
@@ -144,5 +160,6 @@ export default {
     ipcMain.handle('window-open-file', channel.openFileDialogHandler.bind(channel))
     ipcMain.handle('window-open-directory', channel.openDirectoryDialogHandler.bind(channel))
     ipcMain.handle('window-open-terminal', channel.openTerminalHandler.bind(channel))
+    ipcMain.handle('window-open-link', channel.openExternalLinkHandler.bind(channel))
   }
 }

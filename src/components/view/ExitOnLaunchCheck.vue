@@ -1,10 +1,10 @@
 <template>
-  <div class="checkbox" @click="onChange">
-    <label>
+  <div class="checkbox">
+    <label @click="onChange">
       Exit on launch
     </label>
-    <CheckBoxMarkedIcon v-if="checked" />
-    <CheckBoxBlackIcon v-else />
+    <CheckBoxMarkedIcon @click="onChange" v-if="checked" />
+    <CheckBoxBlackIcon @click="onChange" v-else />
   </div>
 </template>
 
@@ -32,7 +32,13 @@ const onChange = () => {
   align-items: center;
   justify-content: flex-end;
 }
+
+.checkbox > * {
+  cursor: pointer;
+}
+
 .checkbox label {
   margin-right: 0.2em;
+  user-select: none;
 }
 </style>

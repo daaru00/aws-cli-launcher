@@ -5,13 +5,10 @@ const state = reactive({
   theme: 'light',
   themes: ['light', 'dark'],
   keys: [
-    'primary-color',
-    'secondary-color',
     'background-color',
     'background-darker-color',
     'border-color',
     'font-color',
-    'error-color',
   ]
 })
 

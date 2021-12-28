@@ -1,14 +1,14 @@
 :root {
-  --light-primary-color: rgb(235, 95, 7);
-  --light-secondary-color: rgb(0, 115, 187);
-  --light-background-color: rgb(250, 250, 250);
+  --primary-color: rgb(236, 114, 17);
+  --primary-hover-color: rgb(235, 95, 7);
+  --secondary-color: rgb(0, 115, 187);
+  --error-color: rgb(214, 39, 40);
+
+  --light-background-color: rgb(242, 243, 243);
   --light-border-color: rgb(170, 183, 184);
   --light-font-color: rgb(22, 25, 31);
-  --light-error-color: rgb(214, 39, 40);
-  
-  --dark-primary-color: rgb(235, 95, 7);
-  --dark-secondary-color: rgb(0, 115, 187);
-  --dark-background-color: rgb(33, 37, 44);
+
+  --dark-background-color: rgb(35, 47, 62);
   --dark-border-color: rgb(135, 149, 150);
   --dark-font-color: rgb(213, 219, 219);
   --dark-error-color: rgb(214, 39, 40);

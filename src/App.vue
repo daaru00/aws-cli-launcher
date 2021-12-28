@@ -107,6 +107,31 @@ button {
   cursor: pointer;
 }
 
+button.primary {
+  font-size: 1em;
+  padding: 0.5em;
+  border: 0;
+  background-color: var(--primary-color);
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  margin-top: 1em;
+}
+
+button.primary:hover {
+  background-color: var(--primary-hover-color);
+}
+
+button.with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button.with-icon .button-label {
+  margin-right: 0.2em;
+}
+
 *::-webkit-scrollbar {
   width: 5px;
 }
