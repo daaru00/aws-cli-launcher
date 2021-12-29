@@ -10,7 +10,8 @@ module.exports = {
         "appId": "com.daaru.aws-cli-launcher",
         "copyright": "Copyright © 2021 Fabio Gollinucci",
         "win": {
-          "target": ["portable", "nsis"]
+          "target": ["portable", "nsis"],
+          "icon": "./build/icons/icon.ico"
         },
         "linux": {
           "target": ["deb", "rpm", "tar.gz", "appImage"],
@@ -18,7 +19,8 @@ module.exports = {
         },
         "mac": {
           "target": ["dmg", "pkg", "tar.gz"],
-          "category": "public.app-category.productivity"
+          "category": "public.app-category.productivity",
+          "icon": "./build/icons/icon.icns"
         },
         "publish": {
           "provider": "github",
