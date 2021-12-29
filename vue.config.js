@@ -15,8 +15,7 @@ module.exports = {
           "target": ["portable", "nsis"]
         },
         "linux": {
-          //"target": ["deb", "rpm", "tar.gz", "appImage"],
-          "target": ["deb"],
+          "target": ["deb", "rpm", "tar.gz", "appImage"],
           "category": "Office"
         },
         "mac": {
