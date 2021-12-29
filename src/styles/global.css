@@ -12,7 +12,7 @@ body {
   display: grid;
   gap: 0;
   grid-template-columns: 100%;
-  grid-template-rows: calc(1em + 10px) auto calc(1em + 10px);
+  grid-template-rows: calc(1.2em + 10px) auto calc(1em + 10px);
   grid-template-areas:
     "header"
     "main"
