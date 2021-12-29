@@ -6,7 +6,6 @@ const state = reactive({
   themes: ['light', 'dark'],
   keys: [
     'background-color',
-    'background-darker-color',
     'border-color',
     'font-color',
   ]
