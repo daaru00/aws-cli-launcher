@@ -4,20 +4,17 @@
       AWS CLI Launcher
     </div>
     <div>
+      <ReloadButton />
       <ThemeSwitch />
-      <button @click="close()" tabindex="-1">
-        <Close />
-      </button>
+      <CloseButton />
     </div>
   </header>  
 </template>
 
 <script setup>
 import ThemeSwitch from './system/ThemeSwitch.vue'
-import Close from './icons/close.vue'
-
-import { useWindow } from '../composables/window'
-const { close } = useWindow()
+import ReloadButton from './system/ReloadButton.vue'
+import CloseButton from './system/CloseButton.vue'
 </script>
 
 <style>

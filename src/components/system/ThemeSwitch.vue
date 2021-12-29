@@ -1,13 +1,13 @@
 <template>
   <button @click="nextTheme()" tabindex="-1">
-    <Light v-if="theme === 'dark'" />
-    <Dark v-if="theme === 'light'" />
+    <LightIcon v-if="theme === 'dark'" />
+    <DarkIcon v-if="theme === 'light'" />
   </button>
 </template>
 
 <script setup>
-import Light from '../icons/light.vue'
-import Dark from '../icons/dark.vue'
+import LightIcon from '../icons/light.vue'
+import DarkIcon from '../icons/dark.vue'
 import { useTheme } from '../../composables/theme'
 
 const { themes, theme, setTheme } = useTheme()
