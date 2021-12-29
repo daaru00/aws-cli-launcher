@@ -53,6 +53,8 @@ export function useAWS() {
       setError('No profiles found in credentials file')
       return
     }
+
+    setError(null)
   }
 
   const getProfileInfo = (name) => {
@@ -80,6 +82,8 @@ export function useAWS() {
     } finally {
       setLoading(false)
     }
+
+    setError(null)
 
     const info = getProfileInfo(profile)
     if (info && info.region)  {

@@ -30,7 +30,7 @@
     <div class="details-row loading-placeholder" v-else></div>
   </div>
 
-  <div class="buttons-containers" v-if="isProfileSet">
+  <div class="buttons-containers" v-if="identity.accountId">
     <div class="row-separator"></div>
 
     <TerminalLauncher />
@@ -48,7 +48,7 @@ import ExitOnLaunchCheck from '../components/view/ExitOnLaunchCheck.vue'
 
 import { ref } from 'vue'
 import { useAWS } from '../composables/aws'
-const { onAuthChanged, getCredentials, identity, isProfileSet } = useAWS()
+const { onAuthChanged, getCredentials, identity } = useAWS()
 
 const credentials = ref({})
 onAuthChanged(async () => {
