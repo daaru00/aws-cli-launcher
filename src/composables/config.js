@@ -24,7 +24,7 @@ export function useConfig() {
 
   const onConfigLoad = (callback) => {
     if (state.loaded) {
-      return callback()
+      callback()
     }
 
     on(EVENT_CONFIG_LOADED, callback)

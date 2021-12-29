@@ -11,32 +11,41 @@
     
     <div class="row-separator"></div>
 
-    <div class="details-row" v-if="identity.accountId">
-      <h3>Account</h3>
-      <strong>{{ identity.accountId }}</strong>
-    </div>
-    <div class="details-row" v-if="identity.arn && identity.isRole">
-      <h3>Role</h3>
-      <strong>{{ identity.role }}</strong>
-    </div>
-    <div class="details-row" v-else-if="identity.arn && identity.isUser">
-      <h3>User</h3>
-      <strong>{{ identity.username }}</strong>
-    </div>
-    <div class="details-row" v-else-if="identity.arn && identity.isRoot">
-      <h3>User</h3>
-      <strong class="alert">ROOT</strong>
-    </div>
-    <div class="details-row loading-placeholder" v-else></div>
+    <transition name="fade">
+      <div class="details-row" v-if="identity.accountId">
+        <h3>Account</h3>
+        <strong>{{ identity.accountId }}</strong>
+      </div>
+    </transition>
+
+    <transition name="fade">
+      <div v-if="identity.arn">
+        <div class="details-row" v-if="identity.isRole">
+          <h3>Role</h3>
+          <strong>{{ identity.role }}</strong>
+        </div>
+        <div class="details-row" v-else-if="identity.isUser">
+          <h3>User</h3>
+          <strong>{{ identity.username }}</strong>
+        </div>
+        <div class="details-row" v-else-if="identity.isRoot">
+          <h3>User</h3>
+          <strong class="alert">ROOT</strong>
+        </div>
+      </div>
+      <div class="details-row loading-placeholder" v-else></div>
+    </transition>
   </div>
 
-  <div class="buttons-containers" v-if="identity.accountId">
-    <div class="row-separator"></div>
+  <transition name="fade">
+    <div class="buttons-containers" v-if="identity.accountId">
+      <div class="row-separator"></div>
 
-    <TerminalLauncher />
-    <ConsoleLauncher />
-    <ExitOnLaunchCheck />
-  </div>
+      <TerminalLauncher />
+      <ConsoleLauncher />
+      <ExitOnLaunchCheck />
+    </div>
+  </transition>
 </template>
 
 <script setup>

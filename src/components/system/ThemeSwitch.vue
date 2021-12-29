@@ -1,7 +1,9 @@
 <template>
   <button @click="nextTheme()" tabindex="-1">
-    <LightIcon v-if="theme === 'dark'" />
-    <DarkIcon v-if="theme === 'light'" />
+    <transition name="fade">
+      <LightIcon v-if="theme === 'dark'" />
+      <DarkIcon v-else-if="theme === 'light'" />
+    </transition>
   </button>
 </template>
 

@@ -15,14 +15,14 @@
 }
 
 .tooltip-content {
-  display: none;
-  margin-right: 0.1em;
+  margin-right: 0.3em;
   font-size: 0.75em;
-  opacity: .7;
+  opacity: 0;
+  transition: opacity ease .5s;
 }
 
 .tooltip:hover .tooltip-content {
-  display: block;
+  opacity: .7;
 }
 </style>
 

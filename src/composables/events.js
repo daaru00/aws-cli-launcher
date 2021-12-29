@@ -24,6 +24,18 @@ export function useEvents() {
   }
 
   /**
+   * @param {string} event 
+   * @param {function} callback 
+   * @returns {void}
+   */
+  const once = (event, callback) => {
+    eventBus.addEventListener(event, ({ detail }) => {
+      callback(detail)
+      eventBus.removeEventListener(event, callback)
+    })
+  }
+
+  /**
    * @param {number} index 
    */
   const off = (index) => {
@@ -47,6 +59,7 @@ export function useEvents() {
 
   return {
     on,
+    once,
     off,
     emit
   }

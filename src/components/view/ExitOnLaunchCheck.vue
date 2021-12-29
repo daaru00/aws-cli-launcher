@@ -4,8 +4,10 @@
       Exit on launch
     </label>
     <button id="exit-on-launch" @click="onChange()" tabindex="-1">
-      <CheckBoxMarkedIcon @click="onChange" v-if="checked" />
-      <CheckBoxBlackIcon @click="onChange" v-else />
+      <transition name="fade">
+        <CheckBoxMarkedIcon v-if="checked" />
+        <CheckBoxBlackIcon v-else />
+      </transition>
     </button>
   </div>
 </template>
