@@ -146,10 +146,11 @@ class Main {
     this.registerIpcChannels()
 
     // Mac need a base menu for copy/past features
+    const context = { app, ipcMain, window: this.mainWindow, menu: Menu }
     if (process.platform === 'darwin') {
-      MacMenu.register({ app, menu: Menu })
+      MacMenu.register(context)
     } else {
-      EmptyMenu.register({ app, menu: Menu })
+      EmptyMenu.register(context)
     }
 
     // Check webpack dev server config
@@ -160,7 +161,7 @@ class Main {
         .then(() => {
           // If in development environment
           if (!process.env.IS_TEST) {
-            this.mainWindow.webContents.openDevTools({mode:'undocked'})
+            this.mainWindow.webContents.openDevTools({ mode:'undocked' })
           }
         })
     } else {
@@ -173,6 +174,11 @@ class Main {
   }
 
   registerShortcut() {
+    // global shortcut in Mac are managed via the Menu
+    if (process.platform === 'darwin') {
+      return
+    }
+
     // register ctrl/cmd+r shortcut
     globalShortcut.register('CommandOrControl+R', () => {
       this.mainWindow.reload()
@@ -185,6 +191,12 @@ class Main {
   }
 
   unregisterShortcut() {
+    // global shortcut in Mac are managed via the Menu
+    if (process.platform === 'darwin') {
+      return
+    }
+
+    // deregister all global shortcut
     globalShortcut.unregisterAll()
   }
 }
