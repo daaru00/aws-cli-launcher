@@ -28,11 +28,11 @@
       <strong class="alert">ROOT</strong>
     </div>
     <div class="details-row loading-placeholder" v-else></div>
-
-    <div class="row-separator"></div>
   </div>
 
-  <div class="buttons-containers">
+  <div class="buttons-containers" v-if="isProfileSet">
+    <div class="row-separator"></div>
+
     <TerminalLauncher />
     <ConsoleLauncher />
     <ExitOnLaunchCheck />
@@ -48,7 +48,7 @@ import ExitOnLaunchCheck from '../components/view/ExitOnLaunchCheck.vue'
 
 import { ref } from 'vue'
 import { useAWS } from '../composables/aws'
-const { onAuthChanged, getCredentials, identity } = useAWS()
+const { onAuthChanged, getCredentials, identity, isProfileSet } = useAWS()
 
 const credentials = ref({})
 onAuthChanged(async () => {
@@ -98,5 +98,10 @@ strong.alert {
 .loading-placeholder {
   justify-content: center;
   min-height: 5em;
+}
+
+.error-container {
+  text-align: center;
+  font-size: 1.5em;
 }
 </style>

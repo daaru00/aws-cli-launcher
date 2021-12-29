@@ -1,6 +1,6 @@
 <template>
   <SystemBar />
-  <main>
+  <main v-if="isLoaded">
     <router-view/>
   </main>
   <StatusBar />
@@ -13,23 +13,29 @@ import StatusBar from './components/Footer.vue'
 import { useConfig } from './composables/config'
 import { useAWS } from './composables/aws'
 import { useTheme } from './composables/theme'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const { loadConfig, onConfigLoad, config } = useConfig()
-const { loadProfiles, assumeProfile, switchRegion } = useAWS()
+const { loadProfiles, assumeProfile, switchRegion, isProfileExist } = useAWS()
 const { setTheme } = useTheme()
 
-// execute application loading
-onMounted(() => Promise.all([loadConfig(), loadProfiles()]))
+onMounted(loadConfig)
 
+const isLoaded = ref(false)
 onConfigLoad(async () => {
-  if (config.profile) {
-    // assume profile is called event if profiles are not already loaded
+  await loadProfiles()
+
+  if (config.profile && isProfileExist(config.profile)) {
     await assumeProfile(config.profile)
+  } else if (isProfileExist('default')) {
+    await assumeProfile('default')
   }
+
   if (config.region) {
     await switchRegion(config.region)
   }
+
+  isLoaded.value = true
 })
 
 onConfigLoad(() => {

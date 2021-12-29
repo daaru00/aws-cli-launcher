@@ -84,8 +84,8 @@ class AwsChannel {
     // Store all founded profiles
     this.profiles = profiles
 
-    // Return only profiles names
-    return profiles.map(profile => profile.name)
+    // Return them
+    return profiles
   }
 
   /**

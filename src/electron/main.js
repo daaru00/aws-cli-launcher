@@ -49,6 +49,9 @@ class Main {
     app.on('window-all-closed', this.onWindowAllClosed.bind(this));
     app.on('activate', this.onActivate.bind(this));
 
+    app.on('browser-window-focus', this.registerShortcut.bind(this));
+    app.on('browser-window-blur', this.unregisterShortcut.bind(this));
+
     // Register exit process hooks
     if (process.platform === 'win32') {
       process.on('message', (data) => {
@@ -155,17 +158,6 @@ class Main {
       this.mainWindow
         .loadURL(process.env.WEBPACK_DEV_SERVER_URL)
         .then(() => {
-          
-          // register ctrl/cmd+r shortcut
-          globalShortcut.register('CommandOrControl+R', () => {
-            this.mainWindow.reload()
-          })
-
-          // register ctrl/cmd+i shortcut
-          globalShortcut.register('CommandOrControl+Shift+I', () => {
-            this.mainWindow.webContents.openDevTools({mode:'undocked'})
-          })
-
           // If in development environment
           if (!process.env.IS_TEST) {
             this.mainWindow.webContents.openDevTools({mode:'undocked'})
@@ -178,6 +170,22 @@ class Main {
       // Load the index.html when not in development
       this.mainWindow.loadURL('app://./index.html')
     }
+  }
+
+  registerShortcut() {
+    // register ctrl/cmd+r shortcut
+    globalShortcut.register('CommandOrControl+R', () => {
+      this.mainWindow.reload()
+    })
+
+    // register ctrl/cmd+i shortcut
+    globalShortcut.register('CommandOrControl+Shift+I', () => {
+      this.mainWindow.webContents.openDevTools({mode:'undocked'})
+    })
+  }
+
+  unregisterShortcut() {
+    globalShortcut.unregisterAll()
   }
 }
 

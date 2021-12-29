@@ -38,10 +38,29 @@ export function useAWS() {
   const { ipc } = useIPC()
   const { emit, on } = useEvents()
   const { config, saveConfig } = useConfig()
-  const { setLoading } = useWindow()
+  const { setLoading, setError } = useWindow()
 
   const loadProfiles = async () => {
-    state.profiles = await ipc.invoke('aws-profiles-load')
+    try {
+      state.profiles = await ipc.invoke('aws-profiles-load')  
+    } catch (error) {
+      console.error(error)
+      setError('No credentials file found')
+      return
+    }
+
+    if (state.profiles.length === 0) {
+      setError('No profiles found in credentials file')
+      return
+    }
+  }
+
+  const getProfileInfo = (name) => {
+    return state.profiles.find(profile => profile.name === name)
+  }
+
+  const isProfileExist = (name) => {
+    return getProfileInfo(name) !== undefined
   }
 
   const assumeProfile = async (profile) => {
@@ -56,9 +75,16 @@ export function useAWS() {
       await loadIdentity() 
     } catch (error) {
       console.error(error)
+      setError('Cannot assume profile ' + profile)
       return
     } finally {
       setLoading(false)
+    }
+
+    const info = getProfileInfo(profile)
+    if (info && info.region)  {
+      state.region = info.region
+      config.region = info.region
     }
 
     emit(EVENT_AWS_AUTH_CHANGED)
@@ -110,10 +136,14 @@ export function useAWS() {
 
   return {
     profile: computed(() => state.profile),
+    isProfileSet: computed(() => !!state.profile),
+    thereAreProfiles: computed(() => state.profiles.length > 0),
     profiles: computed(() => state.profiles),
     region: computed(() => state.region),
     regions: computed(() => state.regions),
     identity: computed(() => state.identity),
+    isProfileExist,
+    getProfileInfo,
     loadProfiles,
     assumeProfile,
     switchRegion,

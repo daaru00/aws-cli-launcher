@@ -1,19 +1,21 @@
 <template>
   <footer>
     <span class="info">{{ 'v'+info.version }}</span>
-    <Pending v-if="isLoading" />
-    <Ready v-else />
+    <PendingIcon v-if="isLoading" />
+    <ErrorIcon v-else-if="isInError" />
+    <ReadyIcon v-else />
   </footer>  
 </template>
 
 <script setup>
-import Pending from './icons/pending.vue'
-import Ready from './icons/ready.vue'
+import PendingIcon from './icons/pending.vue'
+import ReadyIcon from './icons/ready.vue'
+import ErrorIcon from './icons/error.vue'
 
 import { onMounted, ref } from 'vue'
 import { useWindow } from '../composables/window'
 
-const { isLoading, getInfo } = useWindow()
+const { isLoading, isInError, getInfo } = useWindow()
 const info = ref({})
 onMounted(async () => {
   info.value = await getInfo()

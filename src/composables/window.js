@@ -2,7 +2,8 @@ import { computed, reactive } from "vue"
 import { useIPC } from "./ipc"
 
 const state = reactive({
-  loading: false
+  loading: false,
+  error: null
 })
 
 export function useWindow() {
@@ -12,9 +13,16 @@ export function useWindow() {
     state.loading = loading
   }
 
+  const setError = (message) => {
+    state.error = message
+  }
+
   return {
     setLoading,
+    setError,
     isLoading: computed(() => state.loading),
+    isInError: computed(() => !!state.error),
+    errorMessage: computed(() => state.error || ''),
     getInfo: () => { return ipc.invoke('window-info') },
     close: () => { ipc.invoke('window-close') },
     minimize: () => { ipc.invoke('window-minimize') },

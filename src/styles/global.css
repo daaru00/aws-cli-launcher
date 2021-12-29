@@ -59,6 +59,11 @@ select {
   font-size: 1.25em;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 0.1em;
+  max-width: 10em;
+}
+
+select.error {
+  border-bottom: 1px solid var(--error-color);
 }
 
 button:focus, textarea:focus, select:focus {
