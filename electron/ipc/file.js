@@ -71,7 +71,6 @@ export default {
     const channel = new FileChannel({
       path: filePath
     })
-    console.debug(`[${fileName}] File channel ready, using path ${filePath}`);
 
     // Register handlers
     ipcMain.handle('file-' + fileName + '-load', channel.loadHandler.bind(channel))

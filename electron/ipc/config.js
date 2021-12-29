@@ -70,7 +70,6 @@ export default {
     const channel = new ConfigChannel({
       path: filePath
     })
-    console.debug("[config] using config path", filePath);
 
     // Register handlers
     ipcMain.handle('config-load', channel.loadHandler.bind(channel))

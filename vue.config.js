@@ -2,15 +2,13 @@ module.exports = {
   pluginOptions: {
     // https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/guide.html
     electronBuilder: {
-      "mainProcessFile": 'src/electron/main.js',
-      "preload": "src/electron/preload.js",
-      "mainProcessWatch": ['src/electron/**/*'],
+      "mainProcessFile": './electron/main.js',
+      "preload": "./electron/preload.js",
+      "mainProcessWatch": ['./electron/**/*'],
       // https://www.electron.build/configuration/configuration
       "builderOptions": {
         "appId": "com.daaru.aws-cli-launcher",
-        "productName": "AWS CLI Launcher",
-        "executableName": "aws-cli-launcher",
-        "icon": "./public/icon.png",
+        "copyright": "Copyright © 2021 Fabio Gollinucci",
         "win": {
           "target": ["portable", "nsis"]
         },
@@ -20,8 +18,7 @@ module.exports = {
         },
         "mac": {
           "target": ["dmg", "pkg", "tar.gz"],
-          "category": "public.app-category.productivity",
-          "icon": "./public/icon.icns"
+          "category": "public.app-category.productivity"
         },
         "publish": {
           "provider": "github",

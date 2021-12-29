@@ -138,9 +138,13 @@ class Main {
         nodeIntegration: false,
         contextIsolation: true,
         preload: path.join(app.getAppPath(), "preload.js")
-      },
-      icon: this.isDevelopment() ? 'public/icon.png' : './icon.png'
+      }
     })
+
+    // Set icon for development
+    if (this.isDevelopment()) {
+      this.mainWindow.setIcon(path.join("build", "icons", "icon.png"))
+    }
 
     // Register IPC channels
     this.registerIpcChannels()

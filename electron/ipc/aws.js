@@ -285,7 +285,6 @@ export default {
     const aws = new AwsChannel({
       credentialsPath: credentialsPath
     })
-    console.debug('[aws] using credentials path', credentialsPath)
 
     // Register handlers
     ipcMain.handle('aws-profiles-load', aws.loadProfilesHandler.bind(aws))
