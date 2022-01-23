@@ -9,7 +9,7 @@ export const ipc = {
    * @returns 
    */
   invoke: (channel, ...args) => {
-    //console.debug("[IPC] Invoked remote method", channel)
+    console.debug("[IPC] Invoked remote method", channel)
     return ipcRenderer.invoke(channel, ...args)
   }
 }

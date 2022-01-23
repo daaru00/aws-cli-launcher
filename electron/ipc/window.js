@@ -113,24 +113,11 @@ class WindowChannel {
   /**
    * Open terminal window
    */
-  async openTerminalHandler(event, env = {}, cwd = '') {
-    /** @type {import('child_process').ProcessEnvOptions} */
-    const opts = {
+  async openTerminalHandler(event, cmd = '', env = {}, cwd = '') {
+    exec(cmd, {
       cwd: cwd || app.getPath('home'),
       env: {...process.env, ...env}
-    }
-
-    switch (process.platform) {
-      case 'darwin':
-        exec("open -a Terminal.app", opts);
-        break;
-      case 'win32':
-        exec("start cmd.exe", opts);
-        break;
-      case 'linux':
-        exec("x-terminal-emulator", opts);
-        break;
-    }
+    })
   }
 
   async openExternalLinkHandler(event, url) {

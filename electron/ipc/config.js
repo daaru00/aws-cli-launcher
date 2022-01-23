@@ -8,8 +8,19 @@ class ConfigChannel {
    */
   constructor ({path}) {
     this.path = path
-    this.config = {}
     this.autoSave = false
+    this.config = {}
+    switch (process.platform) {
+      case 'darwin':
+        this.config.command = 'open -a Terminal.app'
+        break;
+      case 'win32':
+        this.config.command = 'start cmd.exe'
+        break;
+      case 'linux':
+        this.config.command = 'x-terminal-emulator'
+        break;
+    }
   }
 
   /**
@@ -24,12 +35,14 @@ class ConfigChannel {
     }
 
     if (this.exist() === false) {
-      this.saveHandler(event, {})
-      return {}
+      this.saveHandler(event, this.config)
+      return this.config
     }
 
     const config = JSON.parse(fs.readFileSync(this.path).toString('utf8'))
-    return config || {}
+    Object.assign(this.config, config || {})
+
+    return this.config
   }
 
   /**

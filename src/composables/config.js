@@ -3,7 +3,12 @@ import { useEvents, EVENT_CONFIG_LOADED } from "./events"
 import { reactive, computed } from 'vue'
 
 const state = reactive({
-  config: {},
+  config: {
+    region: '',
+    profile: '',
+    theme: '',
+    command: ''
+  },
   loaded: false
 })
 
@@ -12,14 +17,14 @@ export function useConfig() {
   const { emit, on } = useEvents()
 
   const loadConfig = async () => {
-    Object.assign(state.config, await ipc.invoke('file-db-load'))
+    Object.assign(state.config, await ipc.invoke('config-load'))
     state.loaded = true
 
     emit(EVENT_CONFIG_LOADED)
   }
 
   const saveConfig = async () => {
-    await ipc.invoke('file-db-save', cloneObj(state.config))
+    await ipc.invoke('config-save', cloneObj(state.config))
   }
 
   const onConfigLoad = (callback) => {

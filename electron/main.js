@@ -14,7 +14,7 @@ import EmptyMenu from './menu/empty'
 
 // IPC channels
 import ArgvChannel from './ipc/argv'
-import FileChannel from './ipc/file'
+import ConfigChannel from './ipc/config'
 import WindowChannel from './ipc/window'
 import AwsChannel from './ipc/aws'
 import ClipboardChannel from './ipc/clipboard'
@@ -72,7 +72,7 @@ class Main {
   registerIpcChannels() {
     const context = { app, ipcMain, window: this.mainWindow }
 
-    FileChannel.register(context)
+    ConfigChannel.register(context)
     WindowChannel.register(context)
     ArgvChannel.register(context)
     AwsChannel.register(context)

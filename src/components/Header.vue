@@ -6,6 +6,7 @@
     <div>
       <ReloadButton />
       <ThemeSwitch />
+      <SettingsButton />
       <CloseButton />
     </div>
   </header>  
@@ -15,6 +16,7 @@
 import ThemeSwitch from './system/ThemeSwitch.vue'
 import ReloadButton from './system/ReloadButton.vue'
 import CloseButton from './system/CloseButton.vue'
+import SettingsButton from './system/SettingsButton.vue'
 </script>
 
 <style>
