@@ -111,7 +111,7 @@ class WindowChannel {
   }
 
   /**
-   * Open terminal window
+   * Execute command
    */
   async openTerminalHandler(event, cmd = '', env = {}, cwd = '') {
     exec(cmd, {
@@ -120,6 +120,9 @@ class WindowChannel {
     })
   }
 
+  /**
+   * Open external link in default browser
+   */
   async openExternalLinkHandler(event, url) {
     if (this.allowedExternalHosts.length > 0) {
       const parsedUrl = new URL(url)
