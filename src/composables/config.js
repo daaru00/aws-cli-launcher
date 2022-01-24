@@ -4,9 +4,9 @@ import { reactive, computed } from 'vue'
 
 const state = reactive({
   config: {
-    region: '',
+    region: 'us-east-1',
     profile: '',
-    theme: '',
+    theme: 'light',
     command: ''
   },
   loaded: false

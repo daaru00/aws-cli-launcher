@@ -39,9 +39,8 @@ onConfigLoad(async () => {
 })
 
 onConfigLoad(() => {
-  if (!config.theme) {
-    return
+  if (config.theme) {
+    setTheme(config.theme)
   }
-  setTheme(config.theme)
 })
 </script>
