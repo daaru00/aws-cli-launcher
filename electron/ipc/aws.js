@@ -81,6 +81,12 @@ class AwsChannel {
       // If row does not match header or value skip it
     }
 
+    // Check if last profileIteration is in progress
+    if (profileIteration != null) {
+      profiles.push(profileIteration)
+      profileIteration = null
+    }
+
     // Store all founded profiles
     this.profiles = profiles
 
